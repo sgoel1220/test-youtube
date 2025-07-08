@@ -2,7 +2,7 @@ import pytest
 from PIL import Image, ImageOps
 import os
 import tempfile
-from moviepy.editor import ImageClip, CompositeVideoClip, AudioFileClip, afx
+from moviepy.editor import ImageClip, CompositeVideoClip, AudioFileClip, afx, ColorClip
 
 # Assuming video_utils.py is in the same directory or accessible via PYTHONPATH
 from video_utils import mirror_image, generate_text_image, create_background_clip, get_char_position, create_scene_clips
@@ -48,9 +48,9 @@ def test_generate_text_image():
 def test_create_background_clip(dummy_image_path):
     duration = 10
     size = (1920, 1080)
-    clip = create_background_clip(dummy_image_path, duration, size)
+    clip = create_background_clip(dummy_image_path, duration, size, ImageClip, ColorClip)
 
-    assert isinstance(clip, ImageClip)
+    assert isinstance(clip, CompositeVideoClip)
     assert clip.duration == duration
     assert clip.size == size
 
@@ -70,7 +70,7 @@ def test_create_scene_clips(dummy_image_path):
     size = (1920, 1080)
     side = "left"
 
-    clips = create_scene_clips(dummy_image_path, dummy_image_path, start_time, duration, size, side)
+    clips = create_scene_clips(dummy_image_path, dummy_image_path, start_time, duration, size, side, ImageClip)
 
     assert isinstance(clips, list)
     assert len(clips) == 2

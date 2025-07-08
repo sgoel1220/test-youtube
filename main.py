@@ -3,7 +3,7 @@ import os
 import tempfile
 import shutil
 from datetime import datetime
-from moviepy.editor import ImageClip, AudioFileClip, CompositeVideoClip
+from moviepy.editor import ImageClip, AudioFileClip, CompositeVideoClip, ColorClip
 from video_editor import VideoEditor
 from video_utils import mirror_image, generate_text_image
 from PIL import Image
@@ -13,10 +13,7 @@ def load_config(path):
     with open(path, 'r') as f:
         return json.load(f)
 
-
-if __name__ == "__main__":
-    config = load_config("config.json")
-
+def generate_video(config):
     output_folder = "output"
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
@@ -59,13 +56,20 @@ if __name__ == "__main__":
             "rotate": rotate
         })
 
-    editor = VideoEditor(config, ImageClip_factory=ImageClip, AudioFileClip_factory=AudioFileClip, CompositeVideoClip_factory=CompositeVideoClip)
-    final_video = editor.build_video(processed_characters)
+    editor = VideoEditor(config, ImageClip_factory=ImageClip, AudioFileClip_factory=AudioFileClip, CompositeVideoClip_factory=CompositeVideoClip, ColorClip_factory=ColorClip)
+    
+    outro_images = config.get("outro_images", [])
+
+    final_video = editor.build_video(processed_characters, outro_images=outro_images)
     final_video.write_videofile(
         output_path,
         fps=editor.fps,
         codec="libx264",
         audio_codec="aac"
     )
+    return output_path
 
-    
+if __name__ == "__main__":
+    config = load_config("config.json")
+    output_path = generate_video(config)
+    print(f"Video generated successfully: {output_path}")

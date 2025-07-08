@@ -538,6 +538,31 @@ To improve testability and reduce reliance on extensive mocking, the `video_edit
 4.  **Updated assertions for `create_scene_clips`:**
     *   Used `ANY` for numpy array comparisons in `mock_create_scene_clips.assert_any_call` to avoid `ValueError` due to direct array comparison.
 
+## CLI Application Conversion
+
+To convert the project into an interactive CLI application:
+
+1.  **`main.py` renamed to `video_generator.py`:**
+    *   The original `main.py` containing the video generation logic was renamed to `video_generator.py`.
+    *   Its core functionality was encapsulated within a `generate_video(config)` function.
+
+2.  **New `cli_app.py` created for CLI interaction:**
+    *   A new `cli_app.py` was created to serve as the interactive command-line interface.
+    *   It includes a `get_wojak_characters()` function to dynamically list available Wojak images from the `assets/wojacks` directory.
+    *   It prompts the user to select characters, input their properties (start time, duration, text, side, rotation), and dynamically builds the `characters` section of the video configuration.
+    *   It then calls `video_generator.generate_video()` with the user-defined configuration to create the video.
+
+## Reverting to Script-Only Setup
+
+To revert the project back to a script-only setup:
+
+1.  **`cli_app.py` created:**
+    *   The interactive CLI logic previously in `main.py` was moved to a new file named `cli_app.py`.
+
+2.  **`video_generator.py` renamed to `main.py`:**
+    *   The `video_generator.py` file, containing the core video generation logic, was renamed back to `main.py`.
+    *   The `if __name__ == "__main__":` block in `main.py` was updated to directly call `generate_video(config)` using the `config.json` file, restoring its original script-only functionality.
+
 ## Test Results
 
 All unit tests for `video_editor.py` are now passing, demonstrating the effectiveness of the refactoring and improved test strategy.

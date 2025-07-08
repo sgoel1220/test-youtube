@@ -1,7 +1,7 @@
 import tempfile
 import os
 from PIL import Image, ImageDraw, ImageFont, ImageOps
-from moviepy.editor import ImageClip, CompositeVideoClip, AudioFileClip, afx
+from moviepy.editor import ImageClip, CompositeVideoClip, AudioFileClip, afx, ColorClip
 
 def mirror_image(pil_image):
     mirrored = ImageOps.mirror(pil_image)
@@ -52,11 +52,39 @@ def generate_text_image(text, width=800, height=200, font_size=60,
 
     return img
 
-def create_background_clip(bg_path, duration, size, ImageClip_factory):
-    return (ImageClip_factory(bg_path)
-            .set_duration(duration)
-            .resize(size)
-            .set_position("center"))
+def create_background_clip(bg_path, duration, size, ImageClip_factory, ColorClip_factory):
+    # Create a base black background clip of the canvas size
+    base_clip = ColorClip_factory(size, color=(0, 0, 0), duration=duration)
+
+    # Load the background image
+    bg_image_clip = ImageClip_factory(bg_path)
+
+    # Calculate new dimensions to fit within 'size' while maintaining aspect ratio
+    img_width, img_height = bg_image_clip.size
+    canvas_width, canvas_height = size
+
+    aspect_ratio_img = img_width / img_height
+    aspect_ratio_canvas = canvas_width / canvas_height
+
+    if aspect_ratio_img > aspect_ratio_canvas:
+        # Image is wider than canvas, fit by width
+        new_width = canvas_width
+        new_height = int(canvas_width / aspect_ratio_img)
+    else:
+        # Image is taller than canvas, fit by height
+        new_height = canvas_height
+        new_width = int(canvas_height * aspect_ratio_img)
+
+    # Resize the image clip
+    resized_bg_image_clip = bg_image_clip.resize((new_width, new_height))
+
+    # Set duration and position (center) on the base clip
+    final_bg_clip = (resized_bg_image_clip
+                     .set_duration(duration)
+                     .set_position("center"))
+
+    # Composite the resized image onto the black base clip
+    return CompositeVideoClip([base_clip, final_bg_clip], size=size)
 
 def get_char_position(side, size):
     if side == "left":

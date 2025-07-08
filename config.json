@@ -3,7 +3,18 @@
   "background": "./assets/background_images/classroom2.png",
   "music": "./assets/music/best_background.mp3",
   "fps": 24,
+  "outro_images": [
+    {
+      "image": "./assets/background_images/classroom.png",
+      "duration": 3
+    },
+    {
+      "image": "./assets/background_images/classroom2.png",
+      "duration": 30
+    }
+  ],
   
+
   "characters": [
     {
       "image": "assets/wojacks/doomers/doomer.png",

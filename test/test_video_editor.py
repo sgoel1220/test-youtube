@@ -119,7 +119,8 @@ class TestVideoEditor:
             sample_config["background"],
             max(c["start_time"] + c["duration"] for c in sample_processed_characters),
             editor.canvas_size,
-            editor.ImageClip_factory
+            editor.ImageClip_factory,
+            editor.ColorClip_factory
         )
 
         # Verify create_scene_clips is called for each character
@@ -166,7 +167,8 @@ class TestVideoEditor:
             sample_config["background"],
             0, # Max duration should be 0 for empty characters
             editor.canvas_size,
-            editor.ImageClip_factory
+            editor.ImageClip_factory,
+            editor.ColorClip_factory
         )
         # CompositeVideoClip should still be called, but with only the background
         assert isinstance(video, MockCompositeVideoClip)
