@@ -52,8 +52,8 @@ def generate_text_image(text, width=800, height=200, font_size=60,
 
     return img
 
-def create_background_clip(bg_path, duration, size):
-    return (ImageClip(bg_path)
+def create_background_clip(bg_path, duration, size, ImageClip_factory):
+    return (ImageClip_factory(bg_path)
             .set_duration(duration)
             .resize(size)
             .set_position("center"))
@@ -64,14 +64,14 @@ def get_char_position(side, size):
     else:
         return (size[0] // 2 - 200, size[1] // 2 - 80)
 
-def create_scene_clips(char_image_path, text_image_path, start_time, duration, size, side):
-    char_clip = (ImageClip(char_image_path)
+def create_scene_clips(char_image_path, text_image_path, start_time, duration, size, side, ImageClip_factory):
+    char_clip = (ImageClip_factory(char_image_path)
                  .set_start(start_time)
                  .set_duration(duration)
                  .resize(height=size[1] // 2)
                  .set_position(get_char_position(side, size)))
 
-    text_clip = (ImageClip(text_image_path, transparent=True)
+    text_clip = (ImageClip_factory(text_image_path, transparent=True)
                  .set_start(start_time)
                  .set_duration(duration)
                  .set_position(("center", 100)))
