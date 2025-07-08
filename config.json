@@ -1,0 +1,38 @@
+{
+  "canvas_size": [720, 1280],
+  "background": "./assets/background_images/classroom2.png",
+  "music": "./assets/music/best_background.mp3",
+  "fps": 24,
+  
+  "characters": [
+    {
+      "image": "assets/wojacks/doomers/doomer.png",
+      "start_time": 0,
+      "duration": 2,
+      "text": "Why are we still here?",
+      "side": "left"
+    },
+    {
+      "image": "assets/wojacks/doomers/DoomerStage2.png",
+      "start_time": 2,
+      "duration": 2,
+      "text": "Just to suffer...",
+      "side": "right"
+    },
+    {
+      "image": "assets/wojacks/doomers/doomer.png",
+      "start_time": 4,
+      "duration": 2,
+      "text": "Every night I can feel my leg...",
+      "side": "left"
+    },
+    {
+      "image": "assets/wojacks/doomers/DoomerStage2.png",
+      "start_time": 6,
+      "duration": 2,
+      "text": "And my arm...",
+      "side": "right",
+      "rotate": true
+    }
+  ]
+}
