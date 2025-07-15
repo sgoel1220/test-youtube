@@ -1,47 +1,64 @@
 {
   "canvas_size": [720, 1280],
-  "background": "./assets/background_images/classroom2.png",
-  "music": "./assets/music/best_background.mp3",
+  "background": "assets/background_images/classroom2.png",
+  "music": "assets/music/best_background.mp3",
   "fps": 24,
+  "background_blur_radius": 5,
   "outro_images": [
     {
-      "image": "./assets/background_images/classroom.png",
+      "image": "assets/background_images/classroom.png",
       "duration": 3
     },
     {
-      "image": "./assets/background_images/classroom2.png",
+      "image": "assets/background_images/classroom2.png",
       "duration": 30
     }
   ],
-  
-
+  "outro_overlay_enabled": true,
+  "outro_overlay_opacity": 0.4,
   "characters": [
     {
-      "image": "assets/wojacks/doomers/doomer.png",
+      "image": "assets/wojacks/regular_wojaks/blackjaks/AfroWojak.png",
       "start_time": 0,
       "duration": 2,
-      "text": "Why are we still here?",
+      "text": "He was right beside me... then he dropped",
       "side": "left"
     },
     {
-      "image": "assets/wojacks/doomers/DoomerStage2.png",
+      "image": "assets/wojacks/regular_wojaks/blackjaks/Blackjak1.png",
       "start_time": 2,
       "duration": 2,
-      "text": "Just to suffer...",
+      "text": "Hector?! What happened?",
       "side": "right"
     },
     {
-      "image": "assets/wojacks/doomers/doomer.png",
+      "image": "assets/wojacks/regular_wojaks/blackjaks/AfroWojak.png",
       "start_time": 4,
       "duration": 2,
-      "text": "Every night I can feel my leg...",
+      "text": "We were just marching. No weapons. Just books",
       "side": "left"
     },
     {
-      "image": "assets/wojacks/doomers/DoomerStage2.png",
+      "image": "assets/wojacks/regular_wojaks/blackjaks/Blackjak1.png",
       "start_time": 6,
       "duration": 2,
-      "text": "And my arm...",
+      "text": "And they still did this?",
+      "side": "right",
+      "rotate": true
+    },
+    {
+      "image": "assets/wojacks/regular_wojaks/blackjaks/AfroWojak.png",
+      "start_time": 8,
+      "duration": 2,
+      "text": "He was twelve. Just twelve",
+      "side": "left",
+      "rotate": true
+    },
+    {
+      "image": "assets/wojacks/regular_wojaks/blackjaks/Blackjak1.png",
+      "start_time": 10,
+      "duration": 2,
+      "text": "They're scared of our voices",
       "side": "right",
       "rotate": true
     }

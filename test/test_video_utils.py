@@ -50,7 +50,7 @@ def test_create_background_clip(dummy_image_path):
     size = (1920, 1080)
     clip = create_background_clip(dummy_image_path, duration, size, ImageClip, ColorClip)
 
-    assert isinstance(clip, CompositeVideoClip)
+    assert isinstance(clip, ImageClip)
     assert clip.duration == duration
     assert clip.size == size
 
